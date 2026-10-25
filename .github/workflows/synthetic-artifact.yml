@@ -5,6 +5,7 @@ permissions: {}
 jobs:
   artifact:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
       - name: Generate synthetic artifact
         run: |
