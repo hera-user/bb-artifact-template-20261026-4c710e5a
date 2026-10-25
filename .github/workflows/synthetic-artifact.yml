@@ -1,0 +1,19 @@
+name: Synthetic artifact boundary
+on:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate synthetic artifact
+        run: |
+          python - <<'PY'
+          import pathlib, secrets
+          pathlib.Path("artifact.txt").write_text("bb-artifact-" + secrets.token_hex(16) + "\n", encoding="utf-8")
+          PY
+      - name: Upload synthetic artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-private-artifact
+          path: artifact.txt
